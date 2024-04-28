@@ -26,14 +26,14 @@ CREATE TABLE Signature (
 );
 
 
-INSERT INTO Petition (Titre, Theme, Description, DatePublic, DateFin) VALUES ('Test1', 'Test1', 'Test1', '2020-01-01', '2020-01-02');
-INSERT INTO Petition (Titre, Theme, Description, DatePublic, DateFin) VALUES ('Test2', 'Test2', 'Test2', '2020-01-01', '2020-01-02');
-INSERT INTO Petition (Titre, Theme, Description, DatePublic, DateFin) VALUES ('Test3', 'Test3', 'Test3', '2020-01-01', '2020-01-02');
+INSERT INTO Petition (Titre, Theme, Description, DatePublic, DateFin) VALUES ('Test1', 'Test1', 'Test1', '2024-01-01', '2024-01-02');
+INSERT INTO Petition (Titre, Theme, Description, DatePublic, DateFin) VALUES ('Test2', 'Test2', 'Test2', '2024-01-01', '2024-01-02');
+INSERT INTO Petition (Titre, Theme, Description, DatePublic, DateFin) VALUES ('Test3', 'Test3', 'Test3', '2024-01-01', '2024-01-02');
 
-INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (1, 'Test1', 'Test1', 'Test1', '2020-01-01', '12:00:00');
-INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (1, 'Test2', 'Test2', 'Test2', '2020-01-01', '12:00:00');
-INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (1, 'Test3', 'Test3', 'Test3', '2020-01-01', '12:00:00');
-INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (2, 'Test4', 'Test4', 'Test4', '2020-01-01', '12:00:00');
-INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (2, 'Test5', 'Test5', 'Test5', '2020-01-01', '12:00:00');
-INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (3, 'Test6', 'Test6', 'Test6', '2020-01-01', '12:00:00');
-INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (3, 'Test7', 'Test7', 'Test7', '2020-01-01', '12:00:00');
+INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (1, 'Test1', 'Test1', 'Test1', '2024-01-01', '12:00:00');
+INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (1, 'Test2', 'Test2', 'Test2', '2024-01-01', '12:00:00');
+INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (1, 'Test3', 'Test3', 'Test3', '2024-01-01', '12:00:00');
+INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (2, 'Test4', 'Test4', 'Test4', '2024-01-01', '12:00:00');
+INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (2, 'Test5', 'Test5', 'Test5', '2024-01-01', '12:00:00');
+INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (3, 'Test6', 'Test6', 'Test6', '2024-01-01', '12:00:00');
+INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (3, 'Test7', 'Test7', 'Test7', '2024-01-01', '12:00:00');
