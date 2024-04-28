@@ -9,14 +9,16 @@ class Petition {
     private $Description;
     private $DatePublic;
     private $DateFin;
+    private $SignatureCount;
 
-    public function __construct($IDP, $Titre, $Theme, $Description, $DatePublic, $DateFin) {
+    public function __construct($IDP, $Titre, $Theme, $Description, $DatePublic, $DateFin, $SignatureCount = 0) {
         $this->IDP = $IDP;
         $this->Titre = $Titre;
         $this->Theme = $Theme;
         $this->Description = $Description;
         $this->DatePublic = $DatePublic;
         $this->DateFin = $DateFin;
+        $this->SignatureCount = $SignatureCount;
     }
 
     public static function getAllPetitions()
@@ -79,13 +81,14 @@ class Petition {
                 $row["Theme"],
                 $row["Description"],
                 $row["DatePublic"],
-                $row["DateFin"]
+                $row["DateFin"],
+                $row["SignatureCount"]
             );
         }
 
         $conn->close();
 
-        return null;
+        return $result['SignatureCount'];
     }
 
     public function getIDP()
@@ -146,6 +149,11 @@ class Petition {
     public function setDateFin($DateFin)
     {
         $this->DateFin = $DateFin;
+    }
+
+    public function getSignatureCount()
+    {
+        return $this->SignatureCount;
     }
 
 }

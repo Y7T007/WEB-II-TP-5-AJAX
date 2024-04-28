@@ -40,8 +40,13 @@ $petitions = Petition::getAllPetitions();
 <body>
 <h1>Liste des Pétitions</h1>
 <div class="container">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-7 mx-auto bg-white rounded shadow">
 
-    <table class="table table-striped">
+
+                <div class="table-responsive">
+    <table class=" table table-fixed">
         <thead>
         <tr>
             <th scope="col">IDP</th>
@@ -65,23 +70,70 @@ $petitions = Petition::getAllPetitions();
                 <td><?php echo $petition->getDatePublic(); ?></td>
                 <td><?php echo $petition->getDateFin(); ?></td>
                 <td>
-                    <button class="sign-button">Sign Petition</button>
+                    <button class="btn btn-primary sign-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign Petition</button>
                     <?php include 'SignatureForm.php'; ?>
-
                 </td>
             </tr>
+
 
         <?php endforeach; ?>
 
         </tbody>
     </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <h3>The most Signed Petition is :</h3>
     <p id="most-signed-petition"></p>
 
 
 </div>
+<?php foreach ($petitions as $petition): ?>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Petition Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <th scope="row"><?php echo $petition->getIDP(); ?></th>
+                            <td><?php echo $petition->getTitre(); ?></td>
+                            <td><?php echo $petition->getTheme(); ?></td>
+                            <td><?php echo $petition->getDescription(); ?></td>
+                            <td><?php echo $petition->getDatePublic(); ?></td>
+                            <td><?php echo $petition->getDateFin(); ?></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+
+
+<div class="card" style="width: 18rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25);margin: 14px;min-width: 280px;max-width: 300px;margin-bottom: 20px;">
+    <div style="width:100%;height:200px;background:url('../assets/images/petition.jpg') center / contain;border-top-left-radius:20px;border-top-right-radius:20px;"></div>
+    <div class="card-body d-flex flex-column" style="height: 262px;">
+        <div>
+            <h4 style="font-family: 'Source Sans Pro', sans-serif;font-weight: 700;color: rgb(255,160,0);">IDP # TITRE :</h4>
+            <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Theme : </h6>
+            <p style="font-family: 'Source Sans Pro', sans-serif;color: #212121;margin-top: 16px;">Description:<br /> - Aplicativos Web<br />- Consultoria em TI</p>
+            <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Date Public : </h6>
+            <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Date Fin : </h6>
+            <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Nb Signature:</h6>
+        </div>
+    </div>
+</div>
 <script>
     document.querySelectorAll('.sign-button').forEach(function(button) {
         button.addEventListener('click', function() {
@@ -128,18 +180,15 @@ $petitions = Petition::getAllPetitions();
         xhr.open('GET', '../controllers/Petition.php?action=getMostSigned', true);
         xhr.onload = function() {
             if (this.status == 200) {
-                console.log(this)
                 var petition = JSON.parse(this.responseText);
-                var message = document.getElementById('most-signed-petition');
-                message.textContent = 'The most signed petition is: ' + petition.IDP
-                    + ', Title: ' + petition.Titre
-                    + ', Theme: ' + petition.Theme
-                    + ', Description: ' + petition.Description
-                    + ', Public Date: ' + petition.DatePublic
-                    + ', End Date: ' + petition.DateFin;
-                document.body.appendChild(message);
-
-
+                var card = document.querySelector('.card');
+                card.querySelector('h4').textContent =  'IDP:'+petition.IDP+' # Titre: ' + petition.Titre;
+                card.querySelector('h6:nth-child(2)').textContent = 'Theme: ' + petition.Theme;
+                card.querySelector('p').textContent = 'Description: ' + petition.Description;
+                card.querySelector('h6:nth-child(4)').textContent = 'Date Public: ' + petition.DatePublic;
+                card.querySelector('h6:nth-child(5)').textContent = 'Date Fin: ' + petition.DateFin;
+                // Assuming you have the number of signatures in your response
+                card.querySelector('h6:nth-child(6)').textContent = 'Nb Signature: ' + petition.SignatureCount;
             }
         };
         xhr.send();

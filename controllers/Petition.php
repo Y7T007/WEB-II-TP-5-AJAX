@@ -29,7 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'Theme' => $petition->getTheme(),
         'Description' => $petition->getDescription(),
         'DatePublic' => $petition->getDatePublic(),
-        'DateFin' => $petition->getDateFin()
+        'DateFin' => $petition->getDateFin(),
+        'SignatureCount' => $petition->getSignatureCount()
     ));
 } else {
     // Display an error message
