@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['petition'])) {
 
     $signature = new Signature($IDP, null, $nom, $prenom, $pays, date('Y-m-d'), date('H:i:s'));
 
-    require __DIR__ . '.'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config.php';
+    require __DIR__ .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config.php';
     $sql = "INSERT INTO Signature (IDP, Nom, Prenom, Pays, Date, Heure) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
