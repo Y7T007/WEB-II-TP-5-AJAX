@@ -79,8 +79,6 @@ class Signature {
         $this->Heure = $Heure;
     }
 
-    public function __toString() {
-        return $this->Nom . " " . $this->Prenom . " (" . $this->Pays . ")";
-    }
+
 
 }

@@ -11,11 +11,24 @@ use models\Petition;
 
 $petitions = Petition::getAllPetitions();
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Liste des Pétitions</title>
+    <style>
+        .signature-form {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #000;
+            animation: slideDown 0.5s forwards;
+        }
+
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
 <h1>Liste des Pétitions</h1>
@@ -28,6 +41,7 @@ $petitions = Petition::getAllPetitions();
         <th>Description</th>
         <th>DatePublic</th>
         <th>DateFin</th>
+        <th>Action</th>
     </tr>
 
     <?php foreach ($petitions as $petition): ?>
@@ -39,8 +53,23 @@ $petitions = Petition::getAllPetitions();
             <td><?php echo $petition->getDescription(); ?></td>
             <td><?php echo $petition->getDatePublic(); ?></td>
             <td><?php echo $petition->getDateFin(); ?></td>
+            <td>
+                <button class="sign-button">Sign Petition</button>
+                <?php include 'SignatureForm.php'; ?>
+
+            </td>
         </tr>
     <?php endforeach; ?>
 </table>
+
+<script>
+    document.querySelectorAll('.sign-button').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var form = this.nextElementSibling;
+            form.style.display = 'block';
+        });
+    });
+</script>
+
 </body>
 </html>
