@@ -1,6 +1,7 @@
 <?php
 
-require __DIR__ . './../vendor/autoload.php';
+require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+
 
 use models\Petition;
 
@@ -15,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result['status'] === 'OK') {
         // Redirect to the list of petitions
-        header('Location: ../views/ListePetitions.php');
+        header('Location: ..'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'ListePetitions.php');
     } else {
         // Display an error message
         echo $result['message'];

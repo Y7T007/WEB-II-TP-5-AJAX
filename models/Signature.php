@@ -81,7 +81,7 @@ class Signature {
     public static function getLastFiveSignatures(): array
     {
         global $conn;
-        require __DIR__ . './../config.php';
+        require __DIR__ .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config.php';
 
         $sql = "SELECT * FROM Signature ORDER BY Date DESC, Heure DESC LIMIT 5";
         $result = $conn->query($sql);
@@ -109,7 +109,7 @@ class Signature {
     public static function getLastFiveSignaturesByPetition($IDP): array
     {
         global $conn;
-        require __DIR__ . './../config.php';
+        require __DIR__ .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config.php';
 
         $sql = "SELECT * FROM Signature WHERE IDP = ? ORDER BY Date DESC, Heure DESC LIMIT 5";
         $stmt = $conn->prepare($sql);

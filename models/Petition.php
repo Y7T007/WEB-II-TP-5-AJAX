@@ -22,7 +22,7 @@ class Petition {
     public static function getAllPetitions()
     {
         global $conn;
-        require __DIR__ . './../config.php';
+        require __DIR__ .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config.php';
 
         $sql = "SELECT * FROM Petition";
         $result = $conn->query($sql);
@@ -50,7 +50,7 @@ class Petition {
     {
 
         global $conn;
-        require __DIR__ . './../config.php';
+        require __DIR__ .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config.php';
 
         $sql = "INSERT INTO Petition (Titre, Theme, Description, DatePublic, DateFin) VALUES ('$titre', '$theme', '$description', '$datePublic', '$dateFin')";
 
@@ -66,7 +66,7 @@ class Petition {
     public static function getMostSignedPetition()
     {
         global $conn;
-        require __DIR__ . './../config.php';
+        require __DIR__ .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config.php';
 
         $sql = "SELECT Petition.*, COUNT(Signature.IDS) as SignatureCount FROM Petition LEFT JOIN Signature ON Petition.IDP = Signature.IDP GROUP BY Petition.IDP ORDER BY SignatureCount DESC LIMIT 1";
         $result = $conn->query($sql);

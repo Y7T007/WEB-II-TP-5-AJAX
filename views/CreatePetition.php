@@ -7,7 +7,7 @@
 <body>
 <h1>Create a Petition</h1>
 
-<form action="../controllers/PetitionController.php" method="post">
+<form action="../controllers/Petition.php" method="post">
     <label for="titre">Titre:</label><br>
     <input type="text" id="titre" name="titre"><br>
     <label for="theme">Theme:</label><br>
