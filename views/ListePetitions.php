@@ -164,11 +164,9 @@ $petitions = Petition::getAllPetitions();
 
             var IDP = this.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
 
-            // Create the div once when the page loads
             var signaturesDiv = document.createElement('div');
             form.parentNode.appendChild(signaturesDiv);
 
-            // Wrap your AJAX request in a function
             var loadSignatures = function() {
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', '../controllers/Signature.php?action=getLastFiveByPetition&IDP=' + IDP, true);
@@ -176,7 +174,6 @@ $petitions = Petition::getAllPetitions();
                     if (this.status == 200) {
                         var signatures = JSON.parse(this.responseText);
 
-                        // Clear the div's content before adding new signatures
                         signaturesDiv.innerHTML = '';
 
                         signatures.forEach(function(signature) {
@@ -194,10 +191,8 @@ $petitions = Petition::getAllPetitions();
                 xhr.send();
             };
 
-            // Call the function immediately to load the signatures
             loadSignatures();
 
-            // Then set an interval to call the function every 5 seconds
             setInterval(loadSignatures, 2000);
         });
     });
