@@ -36,6 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['petition'])) {
 
     $stmt->close();
     $conn->close();
+} elseif ($_SERVER["REQUEST_METHOD"] == "GET" && $_GET['action'] == 'getLastFive') {
+    $signatures = Signature::getLastFiveSignatures();
+    echo json_encode($signatures);
 } else {
     echo json_encode(['status' => 'notOK', 'message' => 'Invalid request']);
 }

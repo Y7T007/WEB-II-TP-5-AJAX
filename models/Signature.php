@@ -78,7 +78,32 @@ class Signature {
     public function setHeure($Heure) {
         $this->Heure = $Heure;
     }
+    public static function getLastFiveSignatures()
+    {
+        global $conn;
+        require __DIR__ . './../config.php';
 
+        $sql = "SELECT Petition.*, COUNT(Signature.IDS) as SignatureCount FROM Petition LEFT JOIN Signature ON Petition.IDP = Signature.IDP GROUP BY Petition.IDP ORDER BY SignatureCount DESC LIMIT 5";
+        $result = $conn->query($sql);
+
+        $petitions = [];
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $petitions[] = new Petition(
+                    $row["IDP"],
+                    $row["Titre"],
+                    $row["Theme"],
+                    $row["Description"],
+                    $row["DatePublic"],
+                    $row["DateFin"]
+                );
+            }
+        }
+
+        $conn->close();
+
+        return $petitions;
+    }
 
 
 }

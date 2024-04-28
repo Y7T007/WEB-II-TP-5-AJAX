@@ -46,6 +46,48 @@ class Petition {
         return $petitions;
     }
 
+    public static function createPetition(mixed $titre, mixed $theme, mixed $description, mixed $datePublic, mixed $dateFin)
+    {
+
+        global $conn;
+        require __DIR__ . './../config.php';
+
+        $sql = "INSERT INTO Petition (Titre, Theme, Description, DatePublic, DateFin) VALUES ('$titre', '$theme', '$description', '$datePublic', '$dateFin')";
+
+        if ($conn->query($sql) === TRUE) {
+            $conn->close();
+            return ['status' => 'OK'];
+        } else {
+            $conn->close();
+            return ['status' => 'ERROR', 'message' => 'Error: ' . $sql . '<br>' . $conn->error];
+        }
+    }
+    // models/Petition.php
+    public static function getMostSignedPetition()
+    {
+        global $conn;
+        require __DIR__ . './../config.php';
+
+        $sql = "SELECT Petition.*, COUNT(Signature.IDS) as SignatureCount FROM Petition LEFT JOIN Signature ON Petition.IDP = Signature.IDP GROUP BY Petition.IDP ORDER BY SignatureCount DESC LIMIT 1";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return new Petition(
+                $row["IDP"],
+                $row["Titre"],
+                $row["Theme"],
+                $row["Description"],
+                $row["DatePublic"],
+                $row["DateFin"]
+            );
+        }
+
+        $conn->close();
+
+        return null;
+    }
+
     public function getIDP()
     {
         return $this->IDP;

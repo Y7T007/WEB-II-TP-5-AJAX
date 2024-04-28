@@ -101,5 +101,52 @@ $petitions = Petition::getAllPetitions();
     });
 </script>
 
+<script>
+    // ...
+
+    setInterval(function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '../controllers/Petition.php?action=getMostSigned', true);
+        xhr.onload = function() {
+            if (this.status == 200) {
+                console.log(this)
+                var petition = JSON.parse(this.responseText);
+                var message = document.createElement('p');
+                message.textContent = 'The most signed petition is: ' + petition.IDP
+                    + ', Title: ' + petition.Titre
+                    + ', Theme: ' + petition.Theme
+                    + ', Description: ' + petition.Description
+                    + ', Public Date: ' + petition.DatePublic
+                    + ', End Date: ' + petition.DateFin;
+                document.body.appendChild(message);
+
+
+            }
+        };
+        xhr.send();
+    }, 5000);
+</script>
+
+
+<script>
+
+
+    setInterval(function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '../controllers/Signature.php?action=getLastFive', true);
+        xhr.onload = function() {
+            if (this.status == 200) {
+                var signatures = JSON.parse(this.responseText);
+                var textarea = document.getElementById('last-signatures');
+                textarea.value = signatures.map(function(signature) {
+                    return signature.Nom + ' ' + signature.Prenom;
+                }).join('\n');
+            }
+        };
+        xhr.send();
+    }, 5000);
+</script>
+
+
 </body>
 </html>
