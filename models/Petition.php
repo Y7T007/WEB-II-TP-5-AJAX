@@ -19,6 +19,23 @@ class Petition {
         $this->DateFin = $DateFin;
     }
 
+    public static function getAllPetitions()
+    {
+        global $conn;
+        $sql = "SELECT * FROM Petition";
+        $result = $conn->query($sql);
+        $petitions = [];
+        if ($result === false) {
+            // The SQL query failed. Print the error message.
+            echo "Error: " . $conn->error;
+        } else if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $petitions[] = new Petition($row["IDP"], $row["Titre"], $row["Theme"], $row["Description"], $row["DatePublic"], $row["DateFin"]);
+            }
+        }
+        return $petitions;
+    }
+
     public function getIDP() {
         return $this->IDP;
     }
