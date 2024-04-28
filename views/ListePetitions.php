@@ -71,5 +71,35 @@ $petitions = Petition::getAllPetitions();
     });
 </script>
 
+<script>
+    document.querySelectorAll('.sign-button').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var form = this.nextElementSibling;
+            form.style.display = 'block';
+        });
+    });
+
+    document.querySelectorAll('.signature-form').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '../controllers/Signature.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    var response = JSON.parse(this.responseText);
+                    var message = document.createElement('p');
+                    message.textContent = response.status;
+                    form.parentNode.appendChild(message);
+                }
+            };
+
+            var data = new FormData(form);
+            xhr.send(new URLSearchParams(data).toString());
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -1,6 +1,6 @@
 
 
-<form class="signature-form" action="../controllers/SignatureController.php" method="post">
+<form class="signature-form" action="../controllers/Signature.php" method="post">
     <input type="hidden" name="petition" value="<?php echo $petition->getIDP(); ?>">
     <label for="nom">Nom:</label><br>
     <input type="text" id="nom" name="nom"><br>
