@@ -61,6 +61,8 @@ $petitions = Petition::getAllPetitions();
         </tr>
     <?php endforeach; ?>
 </table>
+<h3>The most Signed Petition is :</h3>
+<p id="most-signed-petition"></p>
 
 <script>
     document.querySelectorAll('.sign-button').forEach(function(button) {
@@ -102,16 +104,15 @@ $petitions = Petition::getAllPetitions();
 </script>
 
 <script>
-    // ...
 
-    setInterval(function() {
+    function MostSignedPetition() {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '../controllers/Petition.php?action=getMostSigned', true);
         xhr.onload = function() {
             if (this.status == 200) {
                 console.log(this)
                 var petition = JSON.parse(this.responseText);
-                var message = document.createElement('p');
+                var message = document.getElementById('most-signed-petition');
                 message.textContent = 'The most signed petition is: ' + petition.IDP
                     + ', Title: ' + petition.Titre
                     + ', Theme: ' + petition.Theme
@@ -124,7 +125,10 @@ $petitions = Petition::getAllPetitions();
             }
         };
         xhr.send();
-    }, 5000);
+    }
+    MostSignedPetition();
+
+    setInterval(MostSignedPetition, 5000);
 </script>
 
 
