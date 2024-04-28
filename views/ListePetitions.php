@@ -139,11 +139,18 @@ $petitions = Petition::getAllPetitions();
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '../controllers/Signature.php?action=getLastFive', true);
         xhr.onload = function() {
-            if (this.status == 200) {
+            console.log(this)
+            if (this.status === 200) {
                 var signatures = JSON.parse(this.responseText);
                 var textarea = document.getElementById('last-signatures');
                 textarea.value = signatures.map(function(signature) {
-                    return signature.Nom + ' ' + signature.Prenom;
+                    return 'IDP: ' + signature.IDP
+                        + ', IDS: ' + signature.IDS
+                        + ', Nom: ' + signature.Nom
+                        + ', Prenom: ' + signature.Prenom
+                        + ', Pays: ' + signature.Pays
+                        + ', Date: ' + signature.Date
+                        + ', Heure: ' + signature.Heure;
                 }).join('\n');
             }
         };

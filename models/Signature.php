@@ -78,31 +78,43 @@ class Signature {
     public function setHeure($Heure) {
         $this->Heure = $Heure;
     }
-    public static function getLastFiveSignatures()
+    public static function getLastFiveSignatures(): array
     {
         global $conn;
         require __DIR__ . './../config.php';
 
-        $sql = "SELECT Petition.*, COUNT(Signature.IDS) as SignatureCount FROM Petition LEFT JOIN Signature ON Petition.IDP = Signature.IDP GROUP BY Petition.IDP ORDER BY SignatureCount DESC LIMIT 5";
+        $sql = "SELECT * FROM Signature ORDER BY Date DESC, Heure DESC LIMIT 5";
         $result = $conn->query($sql);
 
-        $petitions = [];
+        $signatures = [];
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $petitions[] = new Petition(
+                $signature = new Signature(
                     $row["IDP"],
-                    $row["Titre"],
-                    $row["Theme"],
-                    $row["Description"],
-                    $row["DatePublic"],
-                    $row["DateFin"]
+                    $row["IDS"],
+                    $row["Nom"],
+                    $row["Prenom"],
+                    $row["Pays"],
+                    $row["Date"],
+                    $row["Heure"]
                 );
+                $signatures[] = $signature->toArray();
             }
         }
 
         $conn->close();
 
-        return $petitions;
+        return $signatures;
+    }
+    public function toArray() {
+        return [
+            'IDP' => $this->getIDP(),
+            'Nom' => $this->getNom(),
+            'Prenom' => $this->getPrenom(),
+            'Pays' => $this->getPays(),
+            'Date' => $this->getDate(),
+            'Heure' => $this->getHeure(),
+        ];
     }
 
 
