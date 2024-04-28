@@ -1,12 +1,15 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-require_once 'models/Petition.php';
+require __DIR__ . './../vendor/autoload.php';
+
 
 use models\Petition;
 
 $petitions = Petition::getAllPetitions();
-
 ?>
 
 <!DOCTYPE html>
@@ -28,13 +31,14 @@ $petitions = Petition::getAllPetitions();
     </tr>
 
     <?php foreach ($petitions as $petition): ?>
+
         <tr>
-            <td><?= $petition->getIDP() ?></td>
-            <td><?= $petition->getTitre() ?></td>
-            <td><?= $petition->getTheme() ?></td>
-            <td><?= $petition->getDescription() ?></td>
-            <td><?= $petition->getDatePublic() ?></td>
-            <td><?= $petition->getDateFin() ?></td>
+            <td><?php echo $petition->getIDP(); ?></td>
+            <td><?php echo $petition->getTitre(); ?></td>
+            <td><?php echo $petition->getTheme(); ?></td>
+            <td><?php echo $petition->getDescription(); ?></td>
+            <td><?php echo $petition->getDatePublic(); ?></td>
+            <td><?php echo $petition->getDateFin(); ?></td>
         </tr>
     <?php endforeach; ?>
 </table>
