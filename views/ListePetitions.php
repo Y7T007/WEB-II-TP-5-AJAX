@@ -128,7 +128,7 @@ $petitions = Petition::getAllPetitions();
     }
     MostSignedPetition();
 
-    setInterval(MostSignedPetition, 5000);
+    setInterval(MostSignedPetition, 2000);
 </script>
 
 
@@ -155,7 +155,52 @@ $petitions = Petition::getAllPetitions();
             }
         };
         xhr.send();
-    }, 5000);
+    }, 2000);
+
+    document.querySelectorAll('.sign-button').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var form = this.nextElementSibling;
+            form.style.display = 'block';
+
+            var IDP = this.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+
+            // Create the div once when the page loads
+            var signaturesDiv = document.createElement('div');
+            form.parentNode.appendChild(signaturesDiv);
+
+            // Wrap your AJAX request in a function
+            var loadSignatures = function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '../controllers/Signature.php?action=getLastFiveByPetition&IDP=' + IDP, true);
+                xhr.onload = function() {
+                    if (this.status == 200) {
+                        var signatures = JSON.parse(this.responseText);
+
+                        // Clear the div's content before adding new signatures
+                        signaturesDiv.innerHTML = '';
+
+                        signatures.forEach(function(signature) {
+                            var p = document.createElement('p');
+                            p.textContent = 'IDP: ' + signature.IDP
+                                + ', Nom: ' + signature.Nom
+                                + ', Prenom: ' + signature.Prenom
+                                + ', Pays: ' + signature.Pays
+                                + ', Date: ' + signature.Date
+                                + ', Heure: ' + signature.Heure;
+                            signaturesDiv.appendChild(p);
+                        });
+                    }
+                };
+                xhr.send();
+            };
+
+            // Call the function immediately to load the signatures
+            loadSignatures();
+
+            // Then set an interval to call the function every 5 seconds
+            setInterval(loadSignatures, 2000);
+        });
+    });
 </script>
 
 

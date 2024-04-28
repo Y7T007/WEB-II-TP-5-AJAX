@@ -106,6 +106,38 @@ class Signature {
 
         return $signatures;
     }
+    public static function getLastFiveSignaturesByPetition($IDP): array
+    {
+        global $conn;
+        require __DIR__ . './../config.php';
+
+        $sql = "SELECT * FROM Signature WHERE IDP = ? ORDER BY Date DESC, Heure DESC LIMIT 5";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $IDP);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $signatures = [];
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $signature = new Signature(
+                    $row["IDP"],
+                    $row["IDS"],
+                    $row["Nom"],
+                    $row["Prenom"],
+                    $row["Pays"],
+                    $row["Date"],
+                    $row["Heure"]
+                );
+                $signatures[] = $signature->toArray();
+            }
+        }
+
+        $stmt->close();
+        $conn->close();
+
+        return $signatures;
+    }
     public function toArray() {
         return [
             'IDP' => $this->getIDP(),

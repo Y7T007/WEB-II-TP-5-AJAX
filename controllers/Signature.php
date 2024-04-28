@@ -39,6 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['petition'])) {
 } elseif ($_SERVER["REQUEST_METHOD"] == "GET" && $_GET['action'] == 'getLastFive') {
     $signatures = Signature::getLastFiveSignatures();
     echo json_encode($signatures);
-} else {
+}
+elseif ($_SERVER["REQUEST_METHOD"] == "GET" && $_GET['action'] == 'getLastFiveByPetition') {
+    $IDP = $_GET['IDP'];
+    $signatures = Signature::getLastFiveSignaturesByPetition($IDP);
+    echo json_encode($signatures);
+}else {
     echo json_encode(['status' => 'notOK', 'message' => 'Invalid request']);
 }
