@@ -103,6 +103,38 @@ $petitions = Petition::getAllPetitions();
 
         </tbody>
     </table>
+                    <!-- Add this button where you want it to appear -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPetitionModal">
+                        Create Petition
+                    </button>
+
+                    <!-- Add this modal structure at the end of your body tag -->
+                    <div class="modal fade" id="createPetitionModal" tabindex="-1" aria-labelledby="createPetitionModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="createPetitionModalLabel">Create a Petition</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- The content of CreatePetition.php will be loaded here -->
+                                    <?php include 'CreatePetition.php';?>
+                                    <script>
+                                        document.querySelector('[data-bs-target="#createPetitionModal"]').addEventListener('click', function() {
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.open('GET', 'CreatePetition.php', true);
+                                            xhr.onload = function() {
+                                                if (this.status == 200) {
+                                                    document.querySelector('#createPetitionModal .modal-body').innerHTML = this.responseText;
+                                                }
+                                            };
+                                            xhr.send();
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -283,23 +315,7 @@ $petitions = Petition::getAllPetitions();
     });
     
 </script>
-<div class="row space-rows">
-    <div class="col">
-        <div class="card cards-shadown cards-hover">
-            <div class="card-header"><span class="space"><a href="#"><i id="download-icon-1" class="fa fa-cloud-download"></i></a></span>
-                <div class="cardheader-text">
-                    <h4 id="heading-card-1">Nom :</h4>
-                    <p id="cardheader-subtext-1">Prenom :</p>
-                </div>
-            </div>
-            <div class="card-body">
-                <p class="card-text sub-text-color">Pays :</p>
-                <p class="card-text cardbody-sub-text">Date :</p>
-            </div>
-        </div>
-    </div>
-    
-</div>
+
 
 
 </body>
