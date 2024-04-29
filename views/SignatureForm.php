@@ -10,7 +10,6 @@
     <input type="email" id="email" name="email">
     <label for="pays">Pays:</label>
     <input type="text" id="pays" name="pays">
-    <textarea id="last-signatures" readonly></textarea>
 
     <input type="submit" value="Envoyer">
 </form>

@@ -35,10 +35,33 @@ $petitions = Petition::getAllPetitions();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.misdeliver.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<!--    <link rel="stylesheet" href="assets/css/Bootstrap-4---Table-Fixed-Header.css">-->
+<!--    <link rel="stylesheet" href="assets/css/Card-Deck.css">-->
+    <link rel="stylesheet" href="assets/css/Section-Title.css">
 
+    <link rel="stylesheet" href="assets/css/Animation-Cards-_app.css">
+    <link rel="stylesheet" href="assets/css/Animation-Cards.css">
 </head>
 <body>
-<h1>Liste des Pétitions</h1>
+<section class="bg-white">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-6 col-xl-12" style="padding: 0px;background: url(assets/img/petition-scaled.jpg) center / contain no-repeat;border-radius: 20px;">
+                <p><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-6 col-xl-12">
+                <div class="title-div" style="padding: 11px;margin: 18px;margin-right: auto;margin-left: auto;margin-top: 20px;margin-bottom: 20px;">
+                    <h1>Petitions</h1>
+                </div>
+                <hr>
+                <div style="text-align:center"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <div class="container">
     <div class="container py-5">
         <div class="row">
@@ -85,52 +108,30 @@ $petitions = Petition::getAllPetitions();
             </div>
         </div>
 
-    <h3>The most Signed Petition is :</h3>
-    <p id="most-signed-petition"></p>
-
 
 </div>
-<?php foreach ($petitions as $petition): ?>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Petition Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <table class="table">
-                        <tr>
-                            <th scope="row"><?php echo $petition->getIDP(); ?></th>
-                            <td><?php echo $petition->getTitre(); ?></td>
-                            <td><?php echo $petition->getTheme(); ?></td>
-                            <td><?php echo $petition->getDescription(); ?></td>
-                            <td><?php echo $petition->getDatePublic(); ?></td>
-                            <td><?php echo $petition->getDateFin(); ?></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="container py-5">
+        <div class="row" style="display: flex;flex-direction: row;justify-content: center;align-items: center">
+            <h3 style="text-align: center">The most Signed Petition is :</h3>
+            <p id="most-signed-petition"></p>
+
+            <div class="card" style="width: 18rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25);margin: 14px;min-width: 280px;max-width: 300px;margin-bottom: 20px;">
+                <div style="width:100%;height:200px;background:url('../assets/images/petition.jpg') center / contain;border-top-left-radius:20px;border-top-right-radius:20px;"></div>
+                <div class="card-body d-flex flex-column" style="height: 262px;">
+                    <div>
+                        <h4 style="font-family: 'Source Sans Pro', sans-serif;font-weight: 700;color: rgb(255,160,0);">IDP # TITRE :</h4>
+                        <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Theme : </h6>
+                        <p style="font-family: 'Source Sans Pro', sans-serif;color: #212121;margin-top: 16px;">Description:<br /> - Aplicativos Web<br />- Consultoria em TI</p>
+                        <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Date Public : </h6>
+                        <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Date Fin : </h6>
+                        <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Nb Signature:</h6>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-<?php endforeach; ?>
-
-
-
-<div class="card" style="width: 18rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25);margin: 14px;min-width: 280px;max-width: 300px;margin-bottom: 20px;">
-    <div style="width:100%;height:200px;background:url('../assets/images/petition.jpg') center / contain;border-top-left-radius:20px;border-top-right-radius:20px;"></div>
-    <div class="card-body d-flex flex-column" style="height: 262px;">
-        <div>
-            <h4 style="font-family: 'Source Sans Pro', sans-serif;font-weight: 700;color: rgb(255,160,0);">IDP # TITRE :</h4>
-            <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Theme : </h6>
-            <p style="font-family: 'Source Sans Pro', sans-serif;color: #212121;margin-top: 16px;">Description:<br /> - Aplicativos Web<br />- Consultoria em TI</p>
-            <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Date Public : </h6>
-            <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Date Fin : </h6>
-            <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Nb Signature:</h6>
         </div>
     </div>
 </div>
@@ -202,28 +203,6 @@ $petitions = Petition::getAllPetitions();
 <script>
 
 
-    setInterval(function() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '../controllers/Signature.php?action=getLastFive', true);
-        xhr.onload = function() {
-            console.log(this)
-            if (this.status === 200) {
-                var signatures = JSON.parse(this.responseText);
-                var textarea = document.getElementById('last-signatures');
-                textarea.value = signatures.map(function(signature) {
-                    return 'IDP: ' + signature.IDP
-                        + ', IDS: ' + signature.IDS
-                        + ', Nom: ' + signature.Nom
-                        + ', Prenom: ' + signature.Prenom
-                        + ', Pays: ' + signature.Pays
-                        + ', Date: ' + signature.Date
-                        + ', Heure: ' + signature.Heure;
-                }).join('\n');
-            }
-        };
-        xhr.send();
-    }, 2000);
-
     document.querySelectorAll('.sign-button').forEach(function(button) {
         button.addEventListener('click', function() {
             var form = this.nextElementSibling;
@@ -244,14 +223,53 @@ $petitions = Petition::getAllPetitions();
                         signaturesDiv.innerHTML = '';
 
                         signatures.forEach(function(signature) {
+                            var card = document.createElement('div');
+                            card.className = 'row space-rows';
+
+                            var col = document.createElement('div');
+                            col.className = 'col';
+
+                            var cardDiv = document.createElement('div');
+                            cardDiv.className = 'card-2 cards-shadown cards-hover';
+
+                            var cardHeader = document.createElement('div');
+                            cardHeader.className = 'card-header';
+
+                            var cardHeaderText = document.createElement('div');
+                            cardHeaderText.className = 'cardheader-text';
+
+                            var h3 = document.createElement('h3');
+                            h3.textContent = 'Signature';
+                            
+                            var h4 = document.createElement('h4');
+                            h4.textContent = `Signature de M.  ` + signature.Nom;
+
                             var p = document.createElement('p');
-                            p.textContent = 'IDP: ' + signature.IDP
-                                + ', Nom: ' + signature.Nom
-                                + ', Prenom: ' + signature.Prenom
-                                + ', Pays: ' + signature.Pays
-                                + ', Date: ' + signature.Date
-                                + ', Heure: ' + signature.Heure;
-                            signaturesDiv.appendChild(p);
+                            p.textContent = 'Prenom: ' + signature.Prenom;
+
+                            cardHeaderText.appendChild(h4);
+                            cardHeaderText.appendChild(p);
+                            cardHeader.appendChild(cardHeaderText);
+                            cardDiv.appendChild(cardHeader);
+
+                            var cardBody = document.createElement('div');
+                            cardBody.className = 'card-body';
+
+                            var pCountry = document.createElement('p');
+                            pCountry.className = 'card-text sub-text-color';
+                            pCountry.textContent = 'Pays: ' + signature.Pays;
+
+                            var pDate = document.createElement('p');
+                            pDate.className = 'cardbody-sub-text';
+                            pDate.textContent = 'Date: ' + signature.Date;
+
+                            cardBody.appendChild(pCountry);
+                            cardBody.appendChild(pDate);
+                            cardDiv.appendChild(cardBody);
+
+                            col.appendChild(cardDiv);
+                            card.appendChild(col);
+                            signaturesDiv.appendChild(card);
                         });
                     }
                 };
@@ -263,7 +281,25 @@ $petitions = Petition::getAllPetitions();
             setInterval(loadSignatures, 2000);
         });
     });
+    
 </script>
+<div class="row space-rows">
+    <div class="col">
+        <div class="card cards-shadown cards-hover">
+            <div class="card-header"><span class="space"><a href="#"><i id="download-icon-1" class="fa fa-cloud-download"></i></a></span>
+                <div class="cardheader-text">
+                    <h4 id="heading-card-1">Nom :</h4>
+                    <p id="cardheader-subtext-1">Prenom :</p>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text sub-text-color">Pays :</p>
+                <p class="card-text cardbody-sub-text">Date :</p>
+            </div>
+        </div>
+    </div>
+    
+</div>
 
 
 </body>
