@@ -313,6 +313,7 @@ $petitions = Petition::getAllPetitions();
             setInterval(loadSignatures, 2000);
         });
     });
+
     
 </script>
 

@@ -32,7 +32,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'DateFin' => $petition->getDateFin(),
         'SignatureCount' => $petition->getSignatureCount()
     ));
-} else {
+} elseif ($_GET['action'] == 'getAll') {
+    $petitions = Petition::getAllPetitions();
+    $petitionsArray = array_map(function($petition) {
+        return array(
+            'IDP' => $petition->getIDP(),
+            'Titre' => $petition->getTitre(),
+            'Theme' => $petition->getTheme(),
+            'Description' => $petition->getDescription(),
+            'DatePublic' => $petition->getDatePublic(),
+            'DateFin' => $petition->getDateFin()
+        );
+    }, $petitions);
+    echo json_encode($petitionsArray);
+}else {
     // Display an error message
     echo 'Invalid request';
 }
